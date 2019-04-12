@@ -2,24 +2,23 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 	"strings"
 	"unicode"
 	"unicode/utf8"
 )
 
-func GenerateSentence(ord int) {
-	m := NewModel(ord)
+// func GenerateSentence(ord int) {
+// 	m := NewModel(ord)
 
-	words := readSentences("datasets/evil.txt", bufio.ScanWords)
+// 	words := readSentences("datasets/bible.txt", bufio.ScanWords)
 
-	m.TrainSentences(words)
+// 	m.TrainSentences(words)
 
-	for i := 0; i < 15; i++ {
-		fmt.Println(m.GenerateSentence())
-	}
-}
+// 	for i := 0; i < 15; i++ {
+// 		fmt.Println(m.GenerateSentence())
+// 	}
+// }
 
 func (m *Model) TrainSentences(words []string) {
 	for i := 0; i < len(words)-m.ord; i++ {
@@ -33,8 +32,9 @@ func (m *Model) TrainSentences(words []string) {
 	}
 }
 
-func (m *Model) GenerateSentence() string {
+func (m *Model) GenerateSentences(n int) string {
 
+	k := 0
 	out := []string{}
 
 	var prefix string = " "
@@ -49,7 +49,10 @@ func (m *Model) GenerateSentence() string {
 		out = append(out, suffix)
 
 		if strings.HasSuffix(suffix, ".") {
-			break
+			k++
+			if k >= n {
+				break
+			}
 		}
 
 		prefixes := strings.Split(prefix, " ")

@@ -36,14 +36,21 @@ func main() {
 		os.Exit(1)
 	}
 
-	words := readFile(*path, bufio.ScanLines)
-
 	rand.Seed(time.Now().UnixNano())
 
 	m := NewModel(*ord)
 
-	m.TrainWords(words)
+	// bible := readSentences("datasets/bible.txt", bufio.ScanWords)
+	// atlas := readSentences("datasets/atlas-shrugged.txt", bufio.ScanWords)
+	// m.TrainSentences(bible)
+	// m.TrainSentences(atlas)
+	// for i := 0; i < *num; i++ {
+	// 	fmt.Println(m.GenerateSentences(2))
+	// 	fmt.Println()
+	// }
 
+	words := readFile(*path, bufio.ScanLines)
+	m.TrainWords(words)
 	for i := 0; i < *num; i++ {
 		fmt.Println(m.GenerateWord())
 	}
