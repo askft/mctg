@@ -10,12 +10,16 @@ func TestEditDistance(t *testing.T) {
 		n    int
 	}{
 		{"commodore", "commander", 4},
+		{"Privjet", "Привет", 7},
 		{"kitten", "sitting", 3},
 		{"honey", "honeybee", 3},
 		{"kitten", "knitted", 2},
 		{"banana", "ananab", 2},
 		{"book", "bokop", 2},
 		{"book", "back", 2},
+		{"öj", "höj", 1},
+		{"A", "啊", 1},
+		{"A", "a", 1}, // Case matters.
 		{"x", "x", 0},
 		{"x", "", 1},
 		{"", "x", 1},
