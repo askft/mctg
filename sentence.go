@@ -8,18 +8,6 @@ import (
 	"unicode/utf8"
 )
 
-// func GenerateSentence(ord int) {
-// 	m := NewModel(ord)
-
-// 	words := readSentences("datasets/bible.txt", bufio.ScanWords)
-
-// 	m.TrainSentences(words)
-
-// 	for i := 0; i < 15; i++ {
-// 		fmt.Println(m.GenerateSentence())
-// 	}
-// }
-
 func (m *Model) TrainSentences(words []string) {
 	for i := 0; i < len(words)-m.ord; i++ {
 		pres := []string{}
@@ -48,7 +36,7 @@ func (m *Model) GenerateSentences(n int) string {
 		suffix := randomString(m.data[prefix])
 		out = append(out, suffix)
 
-		if strings.HasSuffix(suffix, ".") {
+		if strings.HasSuffix(suffix, ".") || strings.HasSuffix(suffix, "?") || strings.HasSuffix(suffix, "!") {
 			k++
 			if k >= n {
 				break
